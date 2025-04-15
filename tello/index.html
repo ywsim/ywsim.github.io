@@ -9,19 +9,17 @@
     <p><strong>Youngwoo Sim</strong>, <br>RoboDesignLab, UIUC, 2019~2023</p>
     <!-- <img src="teaser.png" alt="Teaser image" style="width:100%; margin: 1em 0;"> -->
     
-    <h2>Preliminary Demos</h2>
-    <p>HMI serves as a physical channel between bipedal robots and a humanoid pilot. It can capture human center of pressure, center of mass, torso position & orientation, ground reaction force, ankle and wirst positions. But more importantly, it can synchronize the pilot with the robot by providing haptic forces to human torso to reduce the spatio-temporal mismatch in dynamics of two underactuated systems.</p>
-    <p>Our favorite demo is to have professors as pilot then apply gentle external wrenches. Since the wrenches are applied almost immediately, it almost feels like you are at an amusement park trying new things. 
-      Then we proceed to explain the core philosophy behind this entire contraption. 
-      We are investigating the synchrony of two dynamical sytsems. 
-      <ol>
-        <li>estabilish bilateral connection between the pilot to the humanoid</li>
-        <li>we kick the robot, and proportional wrench is applied to the pilot</li>
-        <li>the pilot uses reflex to come to balance</li>
-        <li>that human reflex is projected back to robot, bringing the robot back to balance</li>
-      </ol>
+    <h2>Highlights</h2>
+    <p>Tello was my first humanoid which I created mostly from scratch. This robot served two purposes:
+    <ul>
+      <li> further study design principles and metrics (refer to RA-L paper)</li>
+      <li> integrate with HMI to study dynamic bilateral teleoperation</li>
+    </ul>
+    I will leave details of above points for other pages and papers. Here I am showcasing more practical design efforts and videos. 
+    If I recall it correctly, after first CAD design, COVID-19 struck. It was very difficult time for hardware engineer to experiment and make progress with manufacturing. 
     </p>
-    <h3> 2019 ~ 2021</h3>
+
+    <h3> Video 2019~2021</h3>
     <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
       <div style="flex: 1 1 45%; max-width: 45%; position: relative; padding-bottom: 56.25%; height: 0;">
         <iframe
@@ -60,9 +58,8 @@
         </div>
       </div>
 
-    <h3> 2022~2023 </h3>
-    <p>Joey leads control, Youngwoo worked on hardware improvements</p>
-    <h2>Demo Video</h2>
+    <h3> Video 2022~2024 </h3>
+    <p>Note: Joey leads control, Youngwoo worked on hardware improvements</p>
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 800px; margin: 0 auto;">
       <iframe
         src="https://www.youtube.com/embed/VUwpl9ZqsnM"
@@ -73,7 +70,17 @@
       </iframe>
     </div>
 
+    <p>Check Joey Byrnes' works and contribution: <a href="https://www.joeybyrnes.com/" target="_blank">joeybyrnes.com</a></p>
+
     <h3>Design Updates</h3>
+    There were 4 significant design updates. 
+    <ul>
+      <li> Lower leg's four-bar linkage that delivers ankle actuation to improve range of motion and reduce nonlinearity in kinematics: standard to flipped topology</li>
+      <li> The interplay of bearing tolerances' stack up and split gears caused internal collision and gouging, causing a lot of friction. Completely redesigned spur gear differential assembly. </li>
+      <li> Belt (GT3, polychain) broke so often. The issue was sharp negative bend radius. Updated with a series of idlers mimicing a large pulley forming a good negative bend and switched to kevlar core belts.</li>
+      <li> Spatial 4 bar linkage wore out over time, espeically the linings of spherical bearings. Fixed this with more permanent solution with proper hard limits and bearing choices. </li>
+    </ul>
+    After those fixes, the leg got much more stable in performance, and the frequency of maintenance decreased significantly. Morever, friction in transmission was reduced significantly. 
     <!-- <h2>System Overview</h2> -->
 <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start; max-width: 900px; margin: 0 auto;">
 
@@ -108,7 +115,9 @@
 </div>
 
 
-
+<h3> Tello Kinematics </h3>
+<p> Tello's 4-bar linkages are all nonlinear and involves parallel actuation. Hence, proper analysis and modeling was necessary for precise real-time control. Kinematics was modelled with a polynomial fit from which Jacobian was derived. Tello employs a differential transmission that is quite rare, a spur gear differential. </p>
+<p> Later I wanted to help Matthew Chignoli and Nick Adrian develop cluster rigid body algorithm. So I had to create closed loop dynamics model of tello (check rigid body tree with couplings) that involves structural and transmission bodies.</p>
     <div style="display: flex; gap: 20px; justify-content: center; align-items: flex-start;">
       <figure style="flex: 1; text-align: center;">
         <img src="img/tello_4bar_study.png" alt="Image 1" style="height: 200px;">
