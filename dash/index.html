@@ -1,195 +1,157 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Paper Title</title>
-  </head>
-  <body style="max-width: 700px; margin: auto; font-family: sans-serif; padding: 2em;">
-    <h1>Dash: Combine All Learnings to Build the Best Humanoid</h1>
-    <p><strong>Youngwoo Sim, Joao Ramos</strong>, <br>RoboDesignLab, UIUC, 2023~Now</p>
-    <!-- <img src="teaser.png" alt="Teaser image" style="width:100%; margin: 1em 0;"> -->
-    
-    <h2>Highlights</h2>
-    <p>Tello was my first humanoid which I created mostly from scratch. This robot served two purposes:
-    <ul>
-      <li> further study design principles and metrics (refer to RA-L paper)</li>
-      <li> integrate with HMI to study dynamic bilateral teleoperation</li>
-    </ul>
-    I will leave details of above points for other pages and papers. Here I am showcasing more practical design efforts and videos. 
-    If I recall it correctly, after first CAD design, COVID-19 struck. It was very difficult time for hardware engineer to experiment and make progress with manufacturing. 
-    </p>
+<head>
+  <meta charset="UTF-8">
+  <title>Youngwoo Sim | HMI</title>
+  <style>
+    body {
+      max-width: 700px;
+      margin: auto;
+      font-family: sans-serif;
+      line-height: 1.6;
+      padding: 2em;
+    }
+    h1, h2, h3 {
+      margin-bottom: 0.5em;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 1em;
+    }
+    ul, ol {
+      margin: 0.5em 0 1.5em 1.5em;
+    }
+    .media-row {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 2em;
+    }
+    .media-row figure {
+      flex: 1;
+      text-align: center;
+      margin: 0;
+    }
+    .media-row img {
+      height: 200px;
+    }
+    .video-wrapper {
+      flex: 1 1 45%;
+      max-width: 45%;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
 
-    <h3> Highlights </h3>
-    <p>Dash project started with an ambition of achieveing three challenging tasks - running, weight-lifting and loaded carry. As of May 2025, we are assembling parts to see if we made any dumb mistakes.</p>
-    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start; max-width: 900px; margin: 0 auto;">
+  <h1>Human-Machine Interface: Whole-body Haptic Feedback + Mocap</h1>
+  <p><strong>Youngwoo Sim</strong><br>RoboDesignLab, UIUC</p>
 
-      <!-- Image on the left -->
-      <div style="flex: 1; min-width: 300px; text-align: center;">
-        <img src="img/dash_big_picture.png" alt="System image" style="width: 100%; height: auto;">
-        <p style="margin-top: 0.5em;">System Schematic</p>
-      </div>
-      <!-- https://youtube.com/shorts/eZOc7U9POWQ?feature=share -->
-      <!-- YouTube video on the right -->
-      <div style="flex: 1; min-width: 300px; position: relative; padding-bottom: 56.25%; height: 0;">
-        <iframe
-          src="https://www.youtube.com/embed/eZOc7U9POWQ"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-        </iframe>
-      </div>
+  <h2>Preliminary Demos</h2>
+  <p>
+    HMI serves as a physical channel between bipedal robots and a humanoid pilot. It can capture human center of pressure, center of mass, torso position & orientation, ground reaction force, ankle and wrist positions. More importantly, it can synchronize the pilot with the robot by providing haptic forces to the human torso, reducing the spatio-temporal mismatch between the dynamics of two underactuated systems.
+  </p>
+  <p>
+    Our favorite demo is to have professors as pilots and then apply gentle external wrenches. Because the wrenches are applied almost immediately, it feels like an amusement park experience. We then explain the core philosophy:
+  </p>
+  <ol>
+    <li>Establish a bilateral connection between the pilot and the humanoid.</li>
+    <li>We kick the robot, and a proportional wrench is applied to the pilot.</li>
+    <li>The pilot reflexively comes to balance.</li>
+    <li>This human reflex is projected back to the robot, bringing it to balance.</li>
+  </ol>
 
-      <p>My contribution was to analyze and extract candidate designs using control-aware design optimization </p>
-      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 800px; margin: 0 auto;">
-        <iframe
-          src="https://www.youtube.com/embed/DEXYp0TsqRI"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-        </iframe>
-      </div>
-
-    <h3>Design Workflow</h3>
-    <p>
-      <ol>
-        <li>start with rough ideas (tasks, geometry, reduced-order models)</li>
-        <li>curate design libraries (actuators, motors, gearboxes, belts, topologies..)</li>
-        <li>obtain task trajectories (traj. optimization, inverse dynamics + heuristics)</li>
-        <li>run transmission optimization to get nice choice of actuators, reduction and linkage topology</li>
-        <li>carry out downstream engineering and compare</li>
-        <li>iterate until everyone agrees with the design</li>
-      </ol>
-    </p>
-
-    <h4>Rough Design Sketch</h4>
-    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 2em 0;">
-      <figure style="text-align: center;">
-        <img src="img/body_proportion_1.png" alt="Image 1" style="height: 180px;">
-        <figcaption>Body Proportion 1</figcaption>
-      </figure>
-      <figure style="text-align: center;">
-        <img src="img/body_proportion_2.png" alt="Image 2" style="height: 180px;">
-        <figcaption>Body Proportion 2</figcaption>
-      </figure>
-      <figure style="text-align: center;">
-        <img src="img/body_proportion_3.png" alt="Image 3" style="height: 180px;">
-        <figcaption>Body Proportion 3</figcaption>
-      </figure>
+  <div class="media-row">
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/njZ3YXYKAYE" frameborder="0" allowfullscreen></iframe>
     </div>
-
-    <h4>Rough Task Sketch</h4>
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/snatch_analysis.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Snatch Analysis</p>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/k6y27xFnNJA" frameborder="0" allowfullscreen></iframe>
     </div>
-  
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/snatch_motion_sketch.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Snatch Motion Sketch</p>
-    </div>
+  </div>
 
-    <video width="100%" style="max-width: 700px;" controls>
-      <source src="img/snatch_trans_optim.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+  <div class="media-row">
+    <figure>
+      <img src="img/hmi_overview_1.png" alt="Overview 1">
+      <figcaption>Overview 1</figcaption>
+    </figure>
+    <figure>
+      <img src="img/hmi_overview_2.png" alt="Overview 2">
+      <figcaption>Overview 2</figcaption>
+    </figure>
+  </div>
 
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/running_analysis.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Running Analysis</p>
-    </div>
-  
-    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 2em 0;">
-      <figure style="text-align: center;">
-        <img src="img/traj_optim_running_formulation.png" alt="Image 1" style="height: 200px;">
-        <figcaption>Running Trajectory Optimization</figcaption>
-      </figure>
-      <figure style="text-align: center;">
-        <img src="img/traj_optim_running.png" alt="Image 2" style="height: 200px;">
-        <figcaption>Analysis</figcaption>
-      </figure>
-    </div>
+  <h3>Integration with Robots</h3>
+  <p>We investigated various retargeting strategies:</p>
+  <ul>
+    <li>A mix of kinematic and dynamic similarity</li>
+    <li>Reduced-order model based intermediate reference</li>
+  </ul>
 
-    <video width="100%" style="max-width: 700px;" controls>
-      <source src="img/fast_walk_trans_optim.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+  <div class="media-row">
+    <figure>
+      <img src="img/hmi_system_1.png" alt="System 1">
+      <figcaption>System 1</figcaption>
+    </figure>
+    <figure>
+      <img src="img/hmi_system_2.png" alt="System 2">
+      <figcaption>System 2</figcaption>
+    </figure>
+  </div>
 
-    <h4>Rough Design Sketch</h4>
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/design_factors.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Design Factors</p>
-    </div>
+  <h3>Design Optimization</h3>
+  <p>
+    The HMI is equipped with 4 linear actuators (max 150N each) connected to a wearable vest backplate. Since the pilot’s torso is in 6D and only 4 actuators exist, parasitic wrenches appear in a 2D subspace. We minimized these parasitic wrenches using a genetic algorithm.
+  </p>
 
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/design_candidate_study_1.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Overview</p>
-    </div>
+  <div class="media-row">
+    <figure>
+      <img src="img/hmi_design_1.png" alt="Design 1">
+      <figcaption>Design 1</figcaption>
+    </figure>
+    <figure>
+      <img src="img/hmi_design_2.png" alt="Design 2">
+      <figcaption>Design 2</figcaption>
+    </figure>
+  </div>
 
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/design_candidate_study_detail_1.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Sample design study</p>
-    </div>
+  <h3>Implementation Details</h3>
+  <p>
+    A real-time Linux computer (LabVIEW cRIO) acts as middleware: collecting and broadcasting commands and sensor feedback. Motor drivers and integration boards are mounted on the rear face of the HMI.
+  </p>
 
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/design_candidate_study_2.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Pros and Cons</p>
-    </div>
+  <div class="media-row">
+    <figure>
+      <img src="img/hmi_vest.jpg" alt="Vest">
+      <figcaption>Wearable Vest</figcaption>
+    </figure>
+    <figure>
+      <img src="img/hmi_electronics.jpg" alt="Electronics">
+      <figcaption>Electronics Board</figcaption>
+    </figure>
+  </div>
 
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/design_candidate_study_3.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Engineer some details</p>
-    </div>
+  <div class="media-row">
+    <figure>
+      <img src="img/hmi_rt_front.png" alt="RT Front">
+      <figcaption>Real-Time Front</figcaption>
+    </figure>
+    <figure>
+      <img src="img/hmi_rt_back.png" alt="RT Back">
+      <figcaption>Real-Time Back</figcaption>
+    </figure>
+  </div>
 
-    <h4>Detailed Design</h4>
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/dash_render_0.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Engineer some details</p>
-    </div>
-
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/dash_render_1.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Engineer some details</p>
-    </div>
-
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/dash_render_2.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Engineer some details</p>
-    </div>
-
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/dash_render_3.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Engineer some details</p>
-    </div>
-
-
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/dash_render_4.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Engineer some details</p>
-    </div>
-
- 
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/dash_render_5.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Engineer some details</p>
-    </div>
-
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/dash_render_6.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Engineer some details</p>
-    </div>
-
-    <h4>Full Design</h4>
-    <h4>Detailed Design</h4>
-    <div style="flex: 1; min-width: 300px; text-align: center;">
-      <img src="img/dash_full_1.png" alt="System image" style="width: 100%; height: auto;">
-      <p style="margin-top: 0.5em;">Finally!
-      </p>
-    </div>
-
-
-
-
-  </body>
+</body>
 </html>
