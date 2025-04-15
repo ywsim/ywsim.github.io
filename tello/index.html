@@ -102,19 +102,24 @@
   </div>
 
 </div>
+
+<div style="display: flex; gap: 20px; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
+
+  <figure style="flex: 1; text-align: center; margin: 0;">
+    <img src="img/tello_transmission_1.jpg" alt="Image 1" style="height: 400px;">
+    <figcaption>v1 transmission</figcaption>
+  </figure>
+
+  <figure style="flex: 1; text-align: center; margin: 0;">
+    <img src="img/tello_transmission_2.JPG" alt="Image 2" style="height: 400px;">
+    <figcaption>v2 transmission</figcaption>
+  </figure>
+
+</div>
+
 <!-- Single-column layout: One image per row -->
 
-<figure style="text-align: center; margin-bottom: 1em;">
-  <img src="img/tello_transmission_1.jpg" alt="Image 1" style="height: 300px;">
-  <figcaption>v1 transmission</figcaption>
-</figure>
-
-<figure style="text-align: center; margin-bottom: 1em;">
-  <img src="img/tello_transmission_2.JPG" alt="Image 2" style="height: 300px;">
-  <figcaption>v2 transmission</figcaption>
-</figure>
-
-<h3>Tello Kinematics</h3>
+<h3>Tello Kinematics & Dynamics</h3>
 <p>Tello's 4-bar linkages are all nonlinear and involves parallel actuation. Hence, proper analysis and modeling was necessary for precise real-time control. Kinematics was modelled with a polynomial fit from which Jacobian was derived. Tello employs a differential transmission that is quite rare, a spur gear differential.</p>
 <p>Later I wanted to help Matthew Chignoli and Nick Adrian develop cluster rigid body algorithm. So I had to create closed loop dynamics model of tello (check rigid body tree with couplings) that involves structural and transmission bodies.</p>
 
@@ -149,7 +154,7 @@
 </figure>
 
 <figure style="text-align: center; margin-bottom: 1em;">
-  <img src="img/tello_rigid_body_sketch.png" alt="Image" style="height: 300px;">
+  <img src="img/tello_rigid_body_sketch.png" alt="Image" style="height: 450px;">
   <figcaption>Rigid body sketch</figcaption>
 </figure>
 
@@ -168,6 +173,18 @@
   <figcaption>Ball interaction</figcaption>
 </figure>
 
+<h3>Some details</h3>
+<p>worked on dynamometer and studied high-speed velocity estimation</p>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/dyno_design.png" alt="Image" style="height: 300px;">
+  <figcaption>Mechanical spaces</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/vel_est.png" alt="Image" style="height: 300px;">
+  <figcaption>Ball interaction</figcaption>
+</figure>
 
 
   </body>
