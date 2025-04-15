@@ -20,6 +20,23 @@
   height: auto;
 }
 
+
+.intro-photo-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  margin-bottom: 40px;
+  border-radius: 0;
+}
+
+.intro-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
+}
+
+
 .tracker {
   /* visibility: hidden; */
   position: fixed;
