@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Paper Title</title>
+  </head>
+  <body style="max-width: 700px; margin: auto; font-family: sans-serif; padding: 2em;">
+    <h1>Tello: Study of Design Principles and Metrics for Dynamic Humanoid</h1>
+    <p><strong>Youngwoo Sim</strong>, <br>RoboDesignLab, UIUC, 2019~2023</p>
+    <!-- <img src="teaser.png" alt="Teaser image" style="width:100%; margin: 1em 0;"> -->
+    
+    <h2>Highlights</h2>
+    <p>Tello was my first humanoid which I created mostly from scratch. This robot served two purposes:
+    <ul>
+      <li> further study design principles and metrics (refer to RA-L paper)</li>
+      <li> integrate with HMI to study dynamic bilateral teleoperation</li>
+    </ul>
+    I will leave details of above points for other pages and papers. Here I am showcasing more practical design efforts and videos. 
+    If I recall it correctly, after first CAD design, COVID-19 struck. It was very difficult time for hardware engineer to experiment and make progress with manufacturing. 
+    </p>
+
+    <h3> Video 2019~2021</h3>
+    <p> Tello was controlled with real-time controller (National Instruments). I was able to programm control laws (state machine per phase, joint/task space hybrid PD controller). 
+    It was particulary difficult as tasks got more complex - bookkeeping of parameters, PD gains and managing experiment settings. Also, encoders were used instead of IMU to obtain torso/base orientations.  
+    </p>
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+      <div style="flex: 1 1 45%; max-width: 45%; position: relative; padding-bottom: 56.25%; height: 0;">
+        <iframe
+          src="https://www.youtube.com/embed/O7yeR-NHICk"
+          frameborder="0"
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+        </iframe>
+      </div>
+      <div style="flex: 1 1 45%; max-width: 45%; position: relative; padding-bottom: 56.25%; height: 0;">
+        <iframe
+          src="https://www.youtube.com/embed/zmc70OphB38"
+          frameborder="0"
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+        </iframe>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+        <div style="flex: 1 1 45%; max-width: 45%; position: relative; padding-bottom: 56.25%; height: 0;">
+          <iframe
+            src="https://www.youtube.com/embed/XQqZqdfv9jA"
+            frameborder="0"
+            allowfullscreen
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+          </iframe>
+        </div>
+        <div style="flex: 1 1 45%; max-width: 45%; position: relative; padding-bottom: 56.25%; height: 0;">
+          <iframe
+            src="https://www.youtube.com/embed/mn8tCtYHzHI"
+            frameborder="0"
+            allowfullscreen
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+          </iframe>
+        </div>
+      </div>
+
+    <h3> Video 2022~2024 </h3>
+    <p>Note: Joey leads control, Youngwoo worked on hardware improvements</p>
+    <p> Joey threw Labview products out of window and developed Linux RT kernel based controller which takes care of low-level interface and inter process communications. He also was able to reflash motor drivers that were slightly buggy (steadywin's default driver) and rendered the whole hardware much more robust and compact. </p>
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 800px; margin: 0 auto;">
+      <iframe
+        src="https://www.youtube.com/embed/VUwpl9ZqsnM"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+      </iframe>
+    </div>
+
+    <p>Check Joey Byrnes' works and contribution: <a href="https://www.joeybyrnes.com/" target="_blank">joeybyrnes.com</a></p>
+
+    <h3>Design Updates</h3>
+    There were 4 significant design updates. 
+    <ul>
+      <li> Lower leg's four-bar linkage that delivers ankle actuation to improve range of motion and reduce nonlinearity in kinematics: standard to flipped topology</li>
+      <li> The interplay of bearing tolerances' stack up and split gears caused internal collision and gouging, causing a lot of friction. Completely redesigned spur gear differential assembly. </li>
+      <li> Belt (GT3, polychain) broke so often. The issue was sharp negative bend radius. Updated with a series of idlers mimicing a large pulley forming a good negative bend and switched to kevlar core belts.</li>
+      <li> Spatial 4 bar linkage wore out over time, espeically the linings of spherical bearings. Fixed this with more permanent solution with proper hard limits and bearing choices. </li>
+    </ul>
+    After those fixes, the leg got much more stable in performance, and the frequency of maintenance decreased significantly. Morever, friction in transmission was reduced significantly. 
+    <!-- <h2>System Overview</h2> -->
+<div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start; max-width: 900px; margin: 0 auto;">
+
+  <!-- Image on the left -->
+  <div style="flex: 1; min-width: 300px; text-align: center;">
+    <img src="img/tello_fun.jpg" alt="System image" style="width: 100%; height: auto;">
+    <p style="margin-top: 0.5em;">System Schematic</p>
+  </div>
+
+  <!-- YouTube video on the right -->
+  <div style="flex: 1; min-width: 300px; position: relative; padding-bottom: 56.25%; height: 0;">
+    <iframe
+      src="https://www.youtube.com/embed/XdNQuy40rNU"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+    </iframe>
+  </div>
+
+</div>
+
+<div style="display: flex; gap: 20px; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
+
+  <figure style="flex: 1; text-align: center; margin: 0;">
+    <img src="img/tello_transmission_1.jpg" alt="Image 1" style="height: 400px;">
+    <figcaption>v1 transmission</figcaption>
+  </figure>
+
+  <figure style="flex: 1; text-align: center; margin: 0;">
+    <img src="img/tello_transmission_2.JPG" alt="Image 2" style="height: 400px;">
+    <figcaption>v2 transmission</figcaption>
+  </figure>
+
+</div>
+
+<!-- Single-column layout: One image per row -->
+
+<h3>Tello Kinematics & Dynamics</h3>
+<p>Tello's 4-bar linkages are all nonlinear and involves parallel actuation. Hence, proper analysis and modeling was necessary for precise real-time control. Kinematics was modelled with a polynomial fit from which Jacobian was derived. Tello employs a differential transmission that is quite rare, a spur gear differential.</p>
+<p>Later I wanted to help Matthew Chignoli and Nick Adrian develop cluster rigid body algorithm. So I had to create closed loop dynamics model of tello (check rigid body tree with couplings) that involves structural and transmission bodies.</p>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/tello_4bar_study.png" alt="Image" style="height: 300px;">
+  <figcaption>4-bar linkage study</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/tello_4bar_redesign.png" alt="Image" style="height: 300px;">
+  <figcaption>4-bar redesign</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/tello_4bar_kinematics.png" alt="Image" style="height: 300px;">
+  <figcaption>Kinematics v1</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/tello_4bar_kinematics_polyfit.png" alt="Image" style="height: 300px;">
+  <figcaption>Kinematics polyfit</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/tello_carrier_mesh.png" alt="Image" style="height: 300px;">
+  <figcaption>Carrier mesh</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/tello_carrier_kinematics.png" alt="Image" style="height: 300px;">
+  <figcaption>Carrier kinematics</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/tello_rigid_body_sketch.png" alt="Image" style="height: 450px;">
+  <figcaption>Rigid body sketch</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/tello_rigid_body_tree_full.png" alt="Image" style="height: 300px;">
+  <figcaption>Rigid body tree (full)</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/tello_mechanical_spaces.png" alt="Image" style="height: 300px;">
+  <figcaption>Mechanical spaces</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/tello_ball.jpg" alt="Image" style="height: 300px;">
+  <figcaption>Ball interaction</figcaption>
+</figure>
+
+<h3>Some details</h3>
+<p>worked on dynamometer and studied high-speed velocity estimation</p>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/dyno_design.png" alt="Image" style="height: 300px;">
+  <figcaption>Mechanical spaces</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-bottom: 1em;">
+  <img src="img/vel_est.png" alt="Image" style="height: 300px;">
+  <figcaption>Ball interaction</figcaption>
+</figure>
+
+
+  </body>
+</html>
