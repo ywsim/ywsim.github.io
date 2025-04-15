@@ -730,7 +730,7 @@ small {
   font-size: 28px;  /* Try 28px, 32px, 40px, etc. */
 }
 
-/* .about-intro {
-  font-size: 30px;
-  line-height: 1.5;
-} */
+.about-intro {
+  font-size: 24px;
+  /* line-height: 1.5; */
+}
