@@ -23,7 +23,7 @@
 
 .intro-photo-container {
   width: 100%;
-  max-width: 700px;       /* Or 100% if you want full width */
+  max-width: 500px;       /* Or 100% if you want full width */
   margin: 0 auto 20px auto;
   overflow: hidden;
   border-radius: 5px;
@@ -724,4 +724,8 @@ small {
   #intro.section {
     background-position-x: 30%;
   }
+}
+
+#intro h2 {
+  font-size: 28px;  /* Try 28px, 32px, 40px, etc. */
 }
