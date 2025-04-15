@@ -729,3 +729,12 @@ small {
 #intro h2 {
   font-size: 28px;  /* Try 28px, 32px, 40px, etc. */
 }
+
+#about p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+#about li {
+  font-size: 16px;
+}
