@@ -21,20 +21,18 @@
 }
 
 
-/* .intro-photo-container {
-  width: 100%;
-  max-width: 100%;
+.intro-photo-container {
+  width: 60%;
+  margin: 0 auto 20px auto;
   overflow: hidden;
-  margin-bottom: 40px;
-  border-radius: 0;
+  border-radius: 5px;
 }
-
 .intro-photo {
   width: 100%;
   height: auto;
   display: block;
   border-radius: 0;
-} */
+}
 
 
 .intro-photo-wrapper {
