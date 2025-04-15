@@ -23,17 +23,17 @@
 
 .intro-photo-container {
   width: 100%;
-  max-width: 100%;
-  height: 200px; /* or 150px */
+  max-width: 700px;       /* Or 100% if you want full width */
+  margin: 0 auto 20px auto;
   overflow: hidden;
-  margin-bottom: 20px;
   border-radius: 5px;
 }
 
 .intro-photo {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;           /* ✅ This keeps the aspect ratio */
+  display: block;
+  object-fit: contain;    /* ✅ or use 'cover' with caution */
 }
 
 
